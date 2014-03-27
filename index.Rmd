@@ -24,7 +24,7 @@ em {
 * Bruce Hoadley (Asymptotics of MLEs non-iid data; Fair, Isaac model)
 * Emanuel Parzen (kernel density estimation, kernel quantile estimators )
 
----
+--- #slide1
 
 
 ## How most natural processes work
@@ -299,9 +299,14 @@ _So we are facing two black boxes, where ours seems only slightly less inscrutab
 
 That means you talk
 
+[Back to slide 1](#slide1)
+
 ---
 
 
+## Bonus slide
+
+<img src="Joker_Blazer.jpg" width="65%" style="float:center;"/>
 
 
 
