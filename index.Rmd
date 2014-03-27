@@ -283,8 +283,9 @@ _So we are facing two black boxes, where ours seems only slightly less inscrutab
 ## Emanuel Parzen
 
 * There are way more than 2 cultures
-* For example, there is this big quantile regression culture you missed (and I'm a leader in)
-* I think 
+* For example, there is this big quantile regression culture you missed (and he's a leader in)
+
+* In some ways I feel like this implies people aren't branching out as much.
 
 ---
 
