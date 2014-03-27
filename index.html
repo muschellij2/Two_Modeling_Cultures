@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Statistical Modeling - The Two Cultures by Leo Breiman</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Statistical Modeling - The Two Cultures by Leo Breiman">
+  <meta name="author" content="John Muschelli">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Statistical Modeling - The Two Cultures by Leo Breiman</h1>
+    <h2>Journal Club 2014</h2>
+    <p>John Muschelli<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <style>
+em {
+  font-style: italic
+}
+</style>
+
+<h2>People Particpating in this work</h2>
+
+<ul>
+<li>Leo Breiman (CART, random forests)</li>
+<li>Sir David Cox (that whole proportional model or Box-Cox transformation)</li>
+<li>Brad Efron (umm... bootstrap, LAR with the Tibshiranis)</li>
+<li>Bruce Hoadley (Asymptotics of MLEs non-iid data; Fair, Isaac model)</li>
+<li>Emanuel Parzen (kernel density estimation, kernel quantile estimators )</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>How most natural processes work</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="Nature.png" width="120%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Goals of analyzing data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p><em>Prediction. To be able to predict what the responses are going to be to future input variables;</em></p></li>
+<li><p><em>Information. To extract some information about how nature is associating the response variables to the input variables.</em></p></li>
+</ul>
+
+<p><img src="zoltan.jpg" style="float:left;"/>
+<img src="Lemon.jpg" style="float:right;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="goals" style="background:;">
+  <hgroup>
+    <h2>In one camp we have: Modelers</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>In one camp we have: Modelers</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="model.jpg" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>In one camp we have: Modelers</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="makers.jpg" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>In one camp we have: Modelers</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p><em>Model validation. Yes–no using goodness-of-fit tests and residual examination.</em></p></li>
+<li><p><em>Estimated culture population. 98% of all statisticians.</em></p></li>
+</ul>
+
+<p><img src="modelers.png" width="120%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>In the other camp we have: Black Boxers</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>In the other camp we have: Black Boxers</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="briefs.jpg" style="text-align: center; width:500px; height:400px; "/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>In the other camp we have: Black Boxers</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="dogs.jpg" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>In the other camp we have: Black Boxers</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><em>Model validation. Measured by predictive accuracy.</em></li>
+<li><em>Estimated culture population. 2% of statisticians, many in other fields.</em></li>
+</ul>
+
+<p><img src="Black_boxers.png" width="100%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>What Breiman Learned as a Consultant: Good Guidelines</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li> Focus on finding a <strong>good solution</strong>—that&#39;s what consultants (also statisticians) get paid for.</li>
+<li> <strong>Live with the data</strong> before you plunge into modeling.</li>
+<li> Search for a model that gives a good solution, either <strong>algorithmic or data</strong>.</li>
+<li> <strong>Predictive accuracy on test sets</strong> is the criterion for how good the model is.</li>
+<li> <strong>Computers</strong> are an indispensable partner.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Concepts Discussed</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Rashomon: the multiplicity of good models; </p></li>
+<li><p>Occam: the conflict between simplicity and accuracy;</p></li>
+<li><p>Bellman: dimensionality—curse or blessing?</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Rashomon: the multiplicity of good models;</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="pickme.jpg" width="75%" height="75%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Rashomon: the multiplicity of good models;</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Small perturbations to the data or selection process can greatly change models.</p>
+
+<p><img src="ijones1.gif" width="50%" height="50%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Rashomon: the multiplicity of good models;</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Small perturbations to the data or selection process can greatly change models.</p>
+
+<p>Breiman suggests aggregating over large set of compteing models: for example in bagging or model stacking</p>
+
+<p><img src="ijones2.gif" width="50%" height="50%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Occam: the conflict between simplicity and accuracy;</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Occam’s Razor:  simpler is better. 
+&quot;Unfortunately, in prediction, accuracy and simplicity (interpretability) are in conflict.&quot;</p>
+
+<p><img src="tug_of_war.jpg" width="80%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Occam: the conflict between simplicity and accuracy;</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>&quot;Accuracy generally requires more complex prediction methods. Simple and interpretable functions do not make the most accurate predictors.&quot;</p>
+
+<p>Breiman Report Card:</p>
+
+<table style="width:600px">
+<tr>
+  <td>Method</td>
+  <td>Interpretability </td> 
+  <td> Prediction </td>
+</tr>
+<tr>
+  <td>Trees</td>
+  <td><img src="Aplus.jpg" width="50%"/> </td> 
+  <td><img src="Letter-B.jpg" width="50%"/></td>
+</tr>
+<tr>
+  <td>Random Forests</td>
+  <td><img src="F.jpeg" width="50%"/> </td> 
+  <td><img src="Aplus.jpg" width="50%"/></td>
+</tr>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Quick Aside: Trees</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="tree.gif" width="50%" style="float:left;"/>
+<img src="NoTrees.jpg" width="50%" style="float:right;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Quick Aside: Random Forests</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>From <a href="http://www.stat.berkeley.edu/%7Ebreiman/RandomForests/cc_home.htm">http://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm</a></p>
+
+<p>Each tree is grown as follows:</p>
+
+<ol>
+<li> if the number of cases in the training set is N, sample N cases at random - but with replacement, from the original data. This sample will be the training set for growing the tree.</li>
+<li> If there are M input variables, a number m&lt;&lt;M is specified such that at each node, m variables are selected at random out of the M and the best split on these m is used to split the node. The value of m is held constant during the forest growing.</li>
+<li> Each tree is grown to the largest extent possible. There is no pruning.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Bellman: dimensionality—curse or blessing?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>For decades, the first step in prediction methodologyw
+as to avoid the curse.</p>
+
+<p><img src="curse.png" width="80%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Bellman: dimensionality—curse or blessing?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>For prediction: &quot;Instead of reducing dimensionality, increase it by adding many functions of the predictor variables.&quot;s</p>
+
+<p><em>The problem is how to extract and put together these little pieces of information.</em></p>
+
+<p><img src="More_Cowbell.png" width="50%" style="float:center;"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Information from a Black Box</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Usually most complex models are most predictive.</li>
+<li>Our problem setup is a black box:</li>
+</ul>
+
+<p><img src="Nature.png" width="50%" style="float:center;"/></p>
+
+<ul>
+<li>ML methods are a black box:</li>
+</ul>
+
+<p><img src="Black_boxers.png" width="50%" style="float:center;"/></p>
+
+<p><em>So we are facing two black boxes, where ours seems only slightly less inscrutable than nature’s.</em></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>&quot;Doctors can interpret logistic regression&quot;</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p><em>Framing the question as the choice between accuracy and interpretability is an incorrect interpretation of what the goal of a statistical analysis is.</em></p></li>
+<li><p><em>The goal is not interpretability, but accurate information.</em></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>D.R. Cox</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><em>Formal models are useful and often almost, if not quite, essential for incisive thinking.</em></li>
+<li><em>Automatic methods for model sleection are to be shunned</em></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Brad Efron</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Where&#39;s my bias-variance tradeoff
+
+<ul>
+<li>We know a lot about unbiased estimators, but not much about some ML algorithms</li>
+<li>Bias is lurking there somewhere</li>
+</ul></li>
+<li>New Methods always look better than old ones</li>
+<li>Complicated Methods are harder to criticize than simple ones</li>
+<li>Design matters and we&#39;re getting some unstructured data that&#39;s never heard of &quot;good experimental design&quot;</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Bruce Hoadley</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Use medium trees with Generalized Additive models (GAM) in the leaves - that&#39;s interpretable</li>
+<li>(to whom exactly?)</li>
+<li>Validate your results a bunch</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>Emanuel Parzen</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>There are way more than 2 cultures</li>
+<li>For example, there is this big quantile regression culture you missed (and I&#39;m a leader in)</li>
+<li>I think </li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>Breiman rejoinder</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Defines vairable importance based on prediction</li>
+<li>&quot;Statisticians need to become opportunistic&quot;</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>Thoughts and Discussion</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>That means you talk</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='How most natural processes work'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Goals of analyzing data'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='In one camp we have: Modelers'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='In one camp we have: Modelers'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='In one camp we have: Modelers'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='In one camp we have: Modelers'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='In the other camp we have: Black Boxers'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='In the other camp we have: Black Boxers'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='In the other camp we have: Black Boxers'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='In the other camp we have: Black Boxers'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='What Breiman Learned as a Consultant: Good Guidelines'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Concepts Discussed'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Rashomon: the multiplicity of good models;'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Rashomon: the multiplicity of good models;'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Rashomon: the multiplicity of good models;'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Occam: the conflict between simplicity and accuracy;'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Occam: the conflict between simplicity and accuracy;'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Quick Aside: Trees'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Quick Aside: Random Forests'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Bellman: dimensionality—curse or blessing?'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Bellman: dimensionality—curse or blessing?'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Information from a Black Box'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='&quot;Doctors can interpret logistic regression&quot;'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='D.R. Cox'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='Brad Efron'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='Bruce Hoadley'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Emanuel Parzen'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='Breiman rejoinder'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='Thoughts and Discussion'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title=''>
+         31
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
